@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhao.mapper.ProductMapper">
+<resultMap id="CategoryBean" type="category">
+    <id column="cid" property="id"/>
+    <result column="cname" property="name"/>
+    <collection property="products" ofType="product">
+        <id column="pid" property="id"/>
+        <result column="pname" property="name"/>
+        <result column="price" property="price"/>
+    </collection>
+</resultMap>
+<select id="listCategory2" resultMap="CategoryBean">
+        select c.id 'cid',p.cid 'pid' ,c.name 'cname',p.name  'pname',p.price
+        from category_ c LEFT join product_ p on  c.id=p.cid
+    </select>
+</mapper>
